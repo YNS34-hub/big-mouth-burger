@@ -1,144 +1,86 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useState, useEffect } from 'react'
-
-const navItems = [
-  { label: '首页', href: '#' },
-  { label: '菜单', href: '#menu' },
-  { label: '情报', href: '#news' },
-  { label: '关于', href: '#about' },
-]
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
+import { useState } from 'react'
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const { scrollY } = useScroll()
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 100],
-    ['rgba(17, 24, 39, 0)', 'rgba(17, 24, 39, 0.9)']
-  )
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    setScrolled(latest > 50)
+  })
 
   return (
-    <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm"
-      style={{ backgroundColor }}
+    <motion.header
+      className="fixed top-0 left-0 right-0 z-50"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <motion.div
-            className="flex items-center gap-3"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
-              <span className="text-xl">🍔</span>
-            </div>
-            <div>
-              <div className="text-white font-bold text-lg leading-tight">大嘴堡</div>
-              <div className="text-orange-400 text-xs">情报局</div>
-            </div>
-          </motion.div>
+      <div
+        className={`transition-all duration-700 ${
+          scrolled
+            ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/[0.04]'
+            : 'bg-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 lg:h-20">
+            {/* Logo */}
+            <a href="#" className="flex items-center gap-3 group">
+              <div className="w-8 h-8 lg:w-9 lg:h-9 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-shadow duration-500">
+                <span className="text-sm lg:text-base">🍔</span>
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="text-sm lg:text-[15px] font-semibold tracking-tight text-white">
+                  大嘴堡
+                </span>
+                <span className="text-[10px] lg:text-[11px] text-amber-500/80 font-medium tracking-wider uppercase">
+                  Intelligence
+                </span>
+              </div>
+            </a>
 
-          {/* 桌面导航 */}
-          <motion.div
-            className="hidden md:flex items-center gap-8"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                className="text-gray-300 hover:text-orange-400 transition-colors duration-300 text-sm font-medium relative group"
-                whileHover={{ y: -2 }}
+            {/* Nav */}
+            <nav className="hidden md:flex items-center gap-1">
+              {['菜单', '情报', '故事', '门店'].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="px-4 py-2 text-[13px] font-medium text-stone-400 hover:text-white transition-colors duration-300 rounded-lg hover:bg-white/[0.04]"
+                >
+                  {item}
+                </a>
+              ))}
+            </nav>
+
+            {/* Right */}
+            <div className="flex items-center gap-3">
+              <button className="hidden sm:flex w-9 h-9 items-center justify-center rounded-lg text-stone-400 hover:text-white hover:bg-white/[0.04] transition-all duration-300">
+                <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+              </button>
+              <button className="relative w-9 h-9 flex items-center justify-center rounded-lg text-stone-400 hover:text-white hover:bg-white/[0.04] transition-all duration-300">
+                <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-amber-500 text-[10px] font-bold text-black rounded-full flex items-center justify-center">
+                  3
+                </span>
+              </button>
+              <motion.button
+                className="btn-glow ml-2 px-5 py-2 bg-white text-black text-[13px] font-semibold rounded-full hover:bg-amber-100 transition-colors duration-300"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" />
-              </motion.a>
-            ))}
-          </motion.div>
-
-          {/* 右侧按钮 */}
-          <motion.div
-            className="hidden md:flex items-center gap-4"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <button className="text-gray-300 hover:text-white transition-colors duration-300">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-            <button className="relative">
-              <svg className="w-6 h-6 text-gray-300 hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-              <span className="absolute -top-2 -right-2 w-5 h-5 bg-orange-500 text-white text-xs rounded-full flex items-center justify-center">
-                3
-              </span>
-            </button>
-            <motion.button
-              className="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-medium rounded-full hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              立即点餐
-            </motion.button>
-          </motion.div>
-
-          {/* 移动端菜单按钮 */}
-          <button
-            className="md:hidden text-gray-300 hover:text-white"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+                立即点餐
+              </motion.button>
+            </div>
+          </div>
         </div>
-
-        {/* 移动端菜单 */}
-        {isMobileMenuOpen && (
-          <motion.div
-            className="md:hidden py-4 border-t border-gray-800"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="block py-3 text-gray-300 hover:text-orange-400 transition-colors duration-300"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
-            <button className="w-full mt-4 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-medium rounded-full">
-              立即点餐
-            </button>
-          </motion.div>
-        )}
       </div>
-    </motion.nav>
+    </motion.header>
   )
 }
