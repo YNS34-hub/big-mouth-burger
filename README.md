@@ -1,39 +1,55 @@
+![Big Mouth Burger Intelligence — product branding concept](./docs/readme-cover.svg)
+
 # Big Mouth Burger Intelligence
 
-> A concept website exploring premium food branding, editorial storytelling, and motion-led product presentation.
+A fictional brand study exploring **editorial commerce, motion-led product presentation, and interface identity**.
 
-**Status:** Design / frontend concept · not an operating restaurant or commercial service
+**Status:** frontend / brand concept
 
-Big Mouth Burger Intelligence is a personal product-design experiment. The project uses a fictional burger brand to explore how visual identity, storytelling, and interactive presentation can be translated into a polished web experience.
+---
 
-## What this project explores
+## Concept
 
-- Brand-driven landing page design
-- Product storytelling and content hierarchy
-- Motion-enhanced interface composition
-- Responsive layout for consumer-facing websites
-- Translating a loose creative brief into a structured frontend experience
+The project starts from a loose consumer-brand brief and turns it into a complete visual system: positioning, hierarchy, motion, product presentation, and conversion-oriented page structure.
 
-## Main sections
+It is intentionally fictional. The value of the project is the interface study, not the restaurant premise itself.
 
-- **Navigation** — compact brand and site navigation
-- **Hero** — high-impact visual introduction
-- **Features** — product and brand proposition
-- **Showcase** — visual product storytelling
-- **CTA** — conversion-focused closing section
-- **Footer** — supporting navigation and fictional contact details
+## Design direction
 
-> The contact information and brand details shown in the interface are fictional and exist only for the design concept.
+- dark editorial canvas with restrained amber accents
+- large-scale hero composition
+- motion used to support hierarchy rather than decorate every element
+- modular sections for product, story, and showcase content
+- responsive composition across desktop and mobile
+- clear separation between brand voice and interface mechanics
 
-## Tech stack
+## Page system
 
-- **Next.js 16**
-- **React 19**
-- **TypeScript**
-- **Tailwind CSS 4**
-- **Framer Motion**
-- **Three.js**
-- **React Three Fiber / Drei**
+```text
+Navigation
+   ↓
+Hero
+   ↓
+Features
+   ↓
+Showcase
+   ↓
+CTA
+   ↓
+Footer
+```
+
+## Stack
+
+`Next.js 16` · `React 19` · `TypeScript` · `Tailwind CSS 4` · `Framer Motion` · `Three.js` · `React Three Fiber` · `Drei`
+
+## Structure
+
+```text
+src/
+├── app/            # page composition
+└── components/     # navigation, hero, features, showcase, CTA
+```
 
 ## Run locally
 
@@ -42,31 +58,13 @@ npm install
 npm run dev
 ```
 
-Then open `http://localhost:3000`.
-
-Production check:
+Production checks:
 
 ```bash
 npm run build
 npm run lint
 ```
 
-## Repository structure
+## Notes
 
-```text
-src/
-├── app/            # page composition
-└── components/     # navigation, hero, feature, showcase, and CTA sections
-```
-
-## Scope
-
-This is a **frontend and product-visualization experiment**, not a real business website. Its purpose is to document my process of turning a product concept into an implementable interface with clear sections, visual hierarchy, and motion behavior.
-
-## Author
-
-**Jie Tian**  
-Mathematics master's student exploring AI-assisted research, interactive systems, and digital product experiments.
-
-- Portfolio: https://yns34-hub.github.io/
-- GitHub: https://github.com/YNS34-hub
+All brand names, addresses, contact information, and commercial details shown in the interface are fictional and exist only for the concept study.
