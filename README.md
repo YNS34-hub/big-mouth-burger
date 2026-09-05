@@ -1,4 +1,4 @@
-![Big Mouth Burger Intelligence — product branding concept](./docs/readme-cover.svg)
+![Big Mouth Burger Intelligence — product branding concept](./docs/github-cover.png)
 
 # Big Mouth Burger Intelligence
 
