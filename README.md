@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Big Mouth Burger Intelligence
 
-## Getting Started
+> A concept website exploring premium food branding, editorial storytelling, and motion-led product presentation.
 
-First, run the development server:
+**Status:** Design / frontend concept · not an operating restaurant or commercial service
+
+Big Mouth Burger Intelligence is a personal product-design experiment. The project uses a fictional burger brand to explore how visual identity, storytelling, and interactive presentation can be translated into a polished web experience.
+
+## What this project explores
+
+- Brand-driven landing page design
+- Product storytelling and content hierarchy
+- Motion-enhanced interface composition
+- Responsive layout for consumer-facing websites
+- Translating a loose creative brief into a structured frontend experience
+
+## Main sections
+
+- **Navigation** — compact brand and site navigation
+- **Hero** — high-impact visual introduction
+- **Features** — product and brand proposition
+- **Showcase** — visual product storytelling
+- **CTA** — conversion-focused closing section
+- **Footer** — supporting navigation and fictional contact details
+
+> The contact information and brand details shown in the interface are fictional and exist only for the design concept.
+
+## Tech stack
+
+- **Next.js 16**
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+- **Framer Motion**
+- **Three.js**
+- **React Three Fiber / Drei**
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Production check:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run lint
+```
 
-## Learn More
+## Repository structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+src/
+├── app/            # page composition
+└── components/     # navigation, hero, feature, showcase, and CTA sections
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scope
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This is a **frontend and product-visualization experiment**, not a real business website. Its purpose is to document my process of turning a product concept into an implementable interface with clear sections, visual hierarchy, and motion behavior.
 
-## Deploy on Vercel
+## Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Jie Tian**  
+Mathematics master's student exploring AI-assisted research, interactive systems, and digital product experiments.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Portfolio: https://yns34-hub.github.io/
+- GitHub: https://github.com/YNS34-hub
