@@ -1,90 +1,119 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { MeshTransmissionMaterial, Float } from '@react-three/drei'
+import { Float } from '@react-three/drei'
 import * as THREE from 'three'
 
-// 汉堡面包（上层）
+function seededRandom(seed: number) {
+  const value = Math.sin(seed * 16.371 + 91.719) * 43758.5453
+  return value - Math.floor(value)
+}
+
+const SESAME_SEEDS = Array.from({ length: 20 }, (_, i) => {
+  const theta = seededRandom(i * 5 + 1) * Math.PI * 2
+  const phi = seededRandom(i * 5 + 2) * (Math.PI / 3)
+  const radius = 1.05
+
+  return {
+    position: [
+      radius * Math.sin(phi) * Math.cos(theta),
+      0.15 + radius * Math.cos(phi),
+      radius * Math.sin(phi) * Math.sin(theta),
+    ] as [number, number, number],
+    rotation: [
+      seededRandom(i * 5 + 3) * Math.PI,
+      seededRandom(i * 5 + 4) * Math.PI,
+      seededRandom(i * 5 + 5) * Math.PI,
+    ] as [number, number, number],
+  }
+})
+
+const LETTUCE_LEAVES = Array.from({ length: 6 }, (_, i) => {
+  const angle = (i / 6) * Math.PI * 2
+  const radius = 0.8
+
+  return {
+    position: [
+      Math.cos(angle) * radius,
+      0,
+      Math.sin(angle) * radius,
+    ] as [number, number, number],
+    rotation: [
+      0.2 * seededRandom(100 + i * 2),
+      angle,
+      0.1 * seededRandom(101 + i * 2),
+    ] as [number, number, number],
+  }
+})
+
+const TOMATO_SLICES = Array.from({ length: 3 }, (_, i) => {
+  const angle =
+    (i / 3) * Math.PI * 2 + (seededRandom(200 + i) - 0.5) * 0.4
+  const radius = 0.5
+
+  return {
+    position: [
+      Math.cos(angle) * radius,
+      0,
+      Math.sin(angle) * radius,
+    ] as [number, number, number],
+    rotation: [0, -angle, 0] as [number, number, number],
+  }
+})
+
+const CHEESE_DRIPS: [number, number, number][] = [
+  [-0.7, 0, 0.8],
+  [0.6, 0, -0.7],
+  [0.9, 0, 0.3],
+]
+
 function TopBun() {
   return (
     <group position={[0, 0.85, 0]}>
-      {/* 主面包体 */}
       <mesh position={[0, 0.15, 0]}>
         <sphereGeometry args={[1.1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <meshStandardMaterial
-          color="#D4A04A"
-          roughness={0.6}
-          metalness={0.1}
-        />
+        <meshStandardMaterial color="#D4A04A" roughness={0.6} metalness={0.1} />
       </mesh>
-      {/* 芝麻 */}
-      {Array.from({ length: 20 }).map((_, i) => {
-        const theta = Math.random() * Math.PI * 2
-        const phi = Math.random() * Math.PI / 3
-        const r = 1.05
-        return (
-          <mesh
-            key={i}
-            position={[
-              r * Math.sin(phi) * Math.cos(theta),
-              0.15 + r * Math.cos(phi),
-              r * Math.sin(phi) * Math.sin(theta),
-            ]}
-            rotation={[Math.random(), Math.random(), Math.random()]}
-          >
-            <sphereGeometry args={[0.03, 8, 8]} />
-            <meshStandardMaterial color="#FFF8DC" roughness={0.3} />
-          </mesh>
-        )
-      })}
+
+      {SESAME_SEEDS.map((seed, i) => (
+        <mesh key={i} position={seed.position} rotation={seed.rotation}>
+          <sphereGeometry args={[0.03, 8, 8]} />
+          <meshStandardMaterial color="#FFF8DC" roughness={0.3} />
+        </mesh>
+      ))}
     </group>
   )
 }
 
-// 汉堡面包（下层）
 function BottomBun() {
   return (
     <mesh position={[0, -0.65, 0]}>
       <cylinderGeometry args={[1.1, 1.05, 0.35, 32]} />
-      <meshStandardMaterial
-        color="#D4A04A"
-        roughness={0.6}
-        metalness={0.1}
-      />
+      <meshStandardMaterial color="#D4A04A" roughness={0.6} metalness={0.1} />
     </mesh>
   )
 }
 
-// 肉饼
 function Patty() {
   return (
     <mesh position={[0, -0.3, 0]}>
-      <cylinderGeometry args={[1.0, 1.0, 0.25, 32]} />
-      <meshStandardMaterial
-        color="#5C3317"
-        roughness={0.8}
-        metalness={0.05}
-      />
+      <cylinderGeometry args={[1, 1, 0.25, 32]} />
+      <meshStandardMaterial color="#5C3317" roughness={0.8} metalness={0.05} />
     </mesh>
   )
 }
 
-// 芝士片（略微融化效果）
 function Cheese() {
   return (
     <group position={[0, -0.05, 0]}>
       <mesh>
-        <boxGeometry args={[2.0, 0.06, 2.0]} />
-        <meshStandardMaterial
-          color="#FFD700"
-          roughness={0.4}
-          metalness={0.1}
-        />
+        <boxGeometry args={[2, 0.06, 2]} />
+        <meshStandardMaterial color="#FFD700" roughness={0.4} metalness={0.1} />
       </mesh>
-      {/* 融化下垂效果 */}
-      {[[-0.7, 0, 0.8], [0.6, 0, -0.7], [0.9, 0, 0.3]].map((pos, i) => (
-        <mesh key={i} position={pos as [number, number, number]}>
+
+      {CHEESE_DRIPS.map((position, i) => (
+        <mesh key={i} position={position}>
           <boxGeometry args={[0.4, 0.15, 0.3]} />
           <meshStandardMaterial color="#FFD700" roughness={0.4} />
         </mesh>
@@ -93,59 +122,36 @@ function Cheese() {
   )
 }
 
-// 生菜
 function Lettuce() {
   return (
     <group position={[0, 0.1, 0]}>
-      {/* 生菜叶 - 多个不规则形状 */}
-      {Array.from({ length: 6 }).map((_, i) => {
-        const angle = (i / 6) * Math.PI * 2
-        const r = 0.8
-        return (
-          <mesh
-            key={i}
-            position={[Math.cos(angle) * r, 0, Math.sin(angle) * r]}
-            rotation={[0.2 * Math.random(), angle, 0.1 * Math.random()]}
-          >
-            <sphereGeometry args={[0.4, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
-            <meshStandardMaterial
-              color="#4CAF50"
-              roughness={0.7}
-              side={THREE.DoubleSide}
-            />
-          </mesh>
-        )
-      })}
+      {LETTUCE_LEAVES.map((leaf, i) => (
+        <mesh key={i} position={leaf.position} rotation={leaf.rotation}>
+          <sphereGeometry args={[0.4, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
+          <meshStandardMaterial
+            color="#4CAF50"
+            roughness={0.7}
+            side={THREE.DoubleSide}
+          />
+        </mesh>
+      ))}
     </group>
   )
 }
 
-// 番茄片
 function Tomato() {
   return (
     <group position={[0, 0.25, 0]}>
-      {Array.from({ length: 3 }).map((_, i) => {
-        const angle = (i / 3) * Math.PI * 2 + Math.random() * 0.5
-        const r = 0.5
-        return (
-          <mesh
-            key={i}
-            position={[Math.cos(angle) * r, 0, Math.sin(angle) * r]}
-          >
-            <cylinderGeometry args={[0.3, 0.3, 0.08, 16]} />
-            <meshStandardMaterial
-              color="#FF4444"
-              roughness={0.5}
-              metalness={0.05}
-            />
-          </mesh>
-        )
-      })}
+      {TOMATO_SLICES.map((slice, i) => (
+        <mesh key={i} position={slice.position} rotation={slice.rotation}>
+          <cylinderGeometry args={[0.3, 0.3, 0.08, 16]} />
+          <meshStandardMaterial color="#FF4444" roughness={0.5} metalness={0.05} />
+        </mesh>
+      ))}
     </group>
   )
 }
 
-// 洋葱圈
 function Onion() {
   return (
     <mesh position={[0, 0.35, 0]} rotation={[Math.PI / 2, 0, 0]}>
@@ -160,19 +166,15 @@ function Onion() {
   )
 }
 
-// 主汉堡组件
 export default function Burger() {
   const groupRef = useRef<THREE.Group>(null)
   const [hovered, setHovered] = useState(false)
 
   useFrame((state) => {
-    if (groupRef.current) {
-      // 缓慢自动旋转
-      groupRef.current.rotation.y += 0.005
+    if (!groupRef.current) return
 
-      // 轻微上下浮动
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1
-    }
+    groupRef.current.rotation.y += 0.005
+    groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1
   })
 
   return (
@@ -194,6 +196,3 @@ export default function Burger() {
     </Float>
   )
 }
-
-// 添加 useState 导入
-import { useState } from 'react'
