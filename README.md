@@ -48,8 +48,18 @@ Footer
 ```text
 src/
 ├── app/            # page composition
-└── components/     # navigation, hero, features, showcase, CTA
+└── components/     # navigation, hero, features, showcase, CTA, 3D study
 ```
+
+## Quality gate
+
+Every push and pull request runs:
+
+```text
+npm ci → ESLint → production build
+```
+
+Procedural ingredient placement in the 3D burger study is deterministic so rendering stays stable across development and CI environments.
 
 ## Run locally
 
@@ -61,10 +71,10 @@ npm run dev
 Production checks:
 
 ```bash
-npm run build
 npm run lint
+npm run build
 ```
 
 ## Notes
 
-All brand names, addresses, contact information, and commercial details shown in the interface are fictional and exist only for the concept study.
+All brand names, addresses, contact information, ratings, customer counts, and commercial details shown in the interface are fictional and exist only for the concept study.
