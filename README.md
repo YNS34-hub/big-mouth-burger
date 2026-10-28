@@ -1,80 +1,73 @@
-![Big Mouth Burger Intelligence — product branding concept](./docs/github-cover.png)
+<div align="center">
 
-# Big Mouth Burger Intelligence
+<!-- ===================================================================== -->
+<!-- 00 // HERO CAMPAIGN BANNER (FLAME-GRILLED INTELLIGENCE)               -->
+<!-- ===================================================================== -->
+<img src="./docs/github-cover.png" width="100%" alt="BIG MOUTH BURGER — Flame-Grilled Intelligence Campaign Banner" />
 
-A fictional brand study exploring **editorial commerce, motion-led product presentation, and interface identity**.
+<br/>
 
-**Status:** frontend / brand concept
+# BIG MOUTH BURGER INTELLIGENCE · 大嘴堡情报局
 
----
+**200°C Open-Flame Editorial Commerce · High-Impact Campaign Lookbook · Deterministic 3D Web Study**
 
-## Concept
+<sub>
+  A luxury fast-casual brand &amp; spatial web concept inspired by <b>Cannes Lions flame-grilled advertising posters</b>, <b>warm brioche-cream typography</b>, and <b>real-time Three.js / React Three Fiber product choreography</b>.
+</sub>
 
-The project starts from a loose consumer-brand brief and turns it into a complete visual system: positioning, hierarchy, motion, product presentation, and conversion-oriented page structure.
+<br/><br/>
 
-It is intentionally fictional. The value of the project is the interface study, not the restaurant premise itself.
+<!-- ===================================================================== -->
+<!-- 01 // CAMPAIGN POSTER LOOKBOOK (3:4 PROMOTIONAL TRIPTYCH)             -->
+<!-- ===================================================================== -->
+<p align="center">
+  <img src="./docs/poster-01-flame.jpg" width="32%" alt="NO. 01 — FLAME SEARED · Classic Big Mouth Double Angus" />&nbsp;<img src="./docs/poster-02-lava.jpg" width="32%" alt="NO. 02 — MOLTEN GOLD · Quad Aged Cheddar Cheese Lava" />&nbsp;<img src="./docs/poster-03-crimson.jpg" width="32%" alt="NO. 03 — CRIMSON HEAT · Limited Edition Spicy Crunch" />
+</p>
 
-## Design direction
+<sub>
+  <b>CAMPAIGN TRIPTYCH //</b> &nbsp;
+  <code>NO. 01 FLAME SEARED (烈焰双层安格斯)</code> &nbsp;·&nbsp;
+  <code>NO. 02 MOLTEN GOLD (四重芝士熔岩堡)</code> &nbsp;·&nbsp;
+  <code>NO. 03 CRIMSON HEAT (赤焰秘制脆皮堡)</code>
+</sub>
 
-- dark editorial canvas with restrained amber accents
-- large-scale hero composition
-- motion used to support hierarchy rather than decorate every element
-- modular sections for product, story, and showcase content
-- responsive composition across desktop and mobile
-- clear separation between brand voice and interface mechanics
+<br/><br/>
 
-## Page system
+<!-- ===================================================================== -->
+<!-- 02 // BRAND IDENTITY & 7-LAYER EXPLODED BURGER ANATOMY                -->
+<!-- ===================================================================== -->
+<img src="./docs/brand-anatomy.svg" width="100%" alt="Brand Identity System &amp; 7-Layer Exploded Burger Anatomy" />
 
-```text
-Navigation
-   ↓
-Hero
-   ↓
-Features
-   ↓
-Showcase
-   ↓
-CTA
-   ↓
-Footer
-```
+<br/><br/>
 
-## Stack
+<!-- ===================================================================== -->
+<!-- 03 // ENGINEERING STACK & DETERMINISTIC QA                            -->
+<!-- ===================================================================== -->
+<img src="./docs/system-architecture.svg" width="100%" alt="Engineering Stack &amp; CI Verification Architecture" />
 
-`Next.js 16` · `React 19` · `TypeScript` · `Tailwind CSS 4` · `Framer Motion` · `Three.js` · `React Three Fiber` · `Drei`
+</div>
 
-## Structure
+<br/>
 
-```text
-src/
-├── app/            # page composition
-└── components/     # navigation, hero, features, showcase, CTA, 3D study
-```
-
-## Quality gate
-
-Every push and pull request runs:
-
-```text
-npm ci → ESLint → production build
-```
-
-Procedural ingredient placement in the 3D burger study is deterministic so rendering stays stable across development and CI environments.
-
-## Run locally
+## ⚡ Quick Start & Verification
 
 ```bash
+# Install dependencies
 npm install
+
+# Start local development server (http://localhost:3000)
 npm run dev
-```
 
-Production checks:
-
-```bash
+# Run ESLint & production build verification
 npm run lint
 npm run build
 ```
 
-## Notes
+---
 
-All brand names, addresses, contact information, ratings, customer counts, and commercial details shown in the interface are fictional and exist only for the concept study.
+<div align="center">
+  <sub>
+    <b>BIG MOUTH BURGER INTELLIGENCE (大嘴堡情报局)</b> · Art Direction &amp; Spatial Engineering by <a href="https://github.com/YNS34-hub"><b>Jace (YNS34-hub)</b></a><br/>
+    All commercial details, prices, and culinary dossiers exist exclusively for this brand &amp; interface design study.
+  </sub>
+</div>
