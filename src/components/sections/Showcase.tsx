@@ -78,8 +78,8 @@ export default function Showcase() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
             >
-              {/* 3:4 完整装帧商业海报画幅 */}
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#EAE6DF]">
+              {/* 16:10 宽画幅胶片商业海报 */}
+              <div className="relative aspect-[5/3] w-full overflow-hidden bg-[#0d0805]">
                 <Image
                   src={item.image}
                   alt={item.name}
